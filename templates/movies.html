@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block title %}Movie list{% endblock %}
+{% block content %}
+    <h1 class="title" style="color:SlateBlue">Movie Collection</h1>
+
+    {% if movies %}
+<form action ="" method = "post" name = "movie_list">
+    <table class="table is-flex is-striped is-fullwidth is-align-content-center" style="color: SlateBlue;">
+        <div style="bgcolor:gray; color:SlateBlue">
+        <th >Movie Name </th>
+        <th>Year Released</th>
+            <th>  Director  </th>
+        </div>
+      {% for movie_key, movie in movies %}
+      <tr>
+            <td>
+                <label class="checkbox">
+                    <input type = "checkbox" name = "movie_keys" value = "{{ movie_key }}"/>
+                </label>
+                <a href="{{ url_for('movie_page', movie_key=movie_key)}}">{{ movie.title }}</a>
+            </td>
+            <td> {% if movie.year %} ({{ movie.year }}) {% endif %}</td>
+            <td>{{ movie.director }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-danger is-small">Delete</button>
+        </div>
+      </div>
+
+</form>
+    {% endif %}
+{% endblock %}
